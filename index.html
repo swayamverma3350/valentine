@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Divya 💖</title>
+
+  <style>
+    :root{
+      --pink:#ff3b6a;
+      --soft:#ffe6ee;
+      --text:#2e2e2e;
+      --card:#ffffff;
+      --shadow: 0 18px 50px rgba(0,0,0,0.18);
+      --radius: 28px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #ffd1dc, transparent 55%),
+                  radial-gradient(circle at bottom right, #ffe4e1, transparent 60%),
+                  linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      min-height:100vh;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:30px;
+    }
+
+    .shell{
+      width: min(1100px, 100%);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.55);
+      backdrop-filter: blur(10px);
+      border-radius: 36px;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.22);
+      padding: 18px;
+      position: relative;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 18px;
+    }
+
+    .panel{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background: var(--soft);
+      color: var(--pink);
+      font-weight:800;
+      font-size:14px;
+      letter-spacing: 0.2px;
+      white-space:nowrap;
+    }
+
+    .miniTag{
+      font-size:13px;
+      font-weight:700;
+      opacity:.8;
+      color:#444;
+      white-space:nowrap;
+    }
+
+    h1{
+      margin: 10px 0 6px;
+      font-size: 32px;
+      color: var(--pink);
+      line-height:1.1;
+    }
+
+    p{
+      margin: 10px 0;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .name{
+      font-weight:900;
+    }
+
+    /* ---------- Boxes ---------- */
+    .galleryBox{
+      margin-top: 10px;
+      border: 2px solid #ffd1dc;
+      border-radius: 22px;
+      padding: 14px;
+      background: #fff7fa;
+    }
+
+    .galleryTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 12px;
+      font-weight:900;
+      color: var(--pink);
+    }
+
+    .galleryTitle small{
+      font-weight:800;
+      opacity:.75;
+      color:#444;
+    }
+
+    /* ---------- Gallery ---------- */
+    .gallery{
+      position:relative;
+      width:100%;
+      border-radius: 20px;
+      overflow:hidden;
+      background:#ffeef2;
+      aspect-ratio: 16/10;
+      max-height: 420px;
+    }
+
+    .slides{
+      display:flex;
+      height:100%;
+      width:100%;
+      transform: translateX(0);
+      transition: transform .35s ease;
+    }
+
+    .slide{
+      min-width:100%;
+      height:100%;
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding: 18px;
+    }
+
+    .polaroid{
+      width: min(92%, 520px);
+      height: 100%;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 16px 30px rgba(0,0,0,0.18);
+      padding: 14px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+
+    .polaroid img{
+      width:100%;
+      height: 100%;
+      max-height: 320px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #ffeef2;
+    }
+
+    .polaroidBottom{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 0 6px;
+    }
+
+    .polaroidText{
+      font-weight: 900;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .polaroidSticker{
+      background: #ffe6ee;
+      color: #ff3b6a;
+      font-weight: 900;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .navBtn{
+      position:absolute;
+      top:50%;
+      transform: translateY(-50%);
+      width:48px;
+      height:48px;
+      border:none;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:20px;
+      font-weight:900;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 12px 26px rgba(0,0,0,.18);
+      user-select:none;
+    }
+
+    .prev{ left:12px; }
+    .next{ right:12px; }
+
+    .dots{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:#ffc2cf;
+      opacity:.6;
+      cursor:pointer;
+      transition: .2s ease;
+    }
+    .dot.active{
+      background: var(--pink);
+      opacity:1;
+      transform: scale(1.15);
+    }
+
+    /* ---------- Reasons ---------- */
+    .reasonsGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .reasonCard{
+      background: #fff;
+      border: 2px solid #ffd1dc;
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+      font-weight: 900;
+      color:#333;
+      cursor:pointer;
+      transition: .2s ease;
+    }
+
+    .reasonCard:hover{
+      transform: translateY(-2px);
+    }
+
+    .reasonSmall{
+      font-size: 12.5px;
+      opacity: .78;
+      font-weight: 800;
+      margin-top:6px;
+    }
+
+    /* ---------- Right Panel ---------- */
+    .questionTitle{
+      font-size: 26px;
+      font-weight: 1000;
+      color: var(--pink);
+      margin: 10px 0 6px;
+    }
+
+    .cardMini{
+      background: #fff7fa;
+      border: 2px solid #ffd1dc;
+      border-radius: 22px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .btns{
+      display:flex;
+      gap:14px;
+      margin-top: 14px;
+      align-items:center;
+      justify-content:flex-start;
+      flex-wrap: wrap;
+    }
+
+    button.action{
+      border:none;
+      cursor:pointer;
+      border-radius: 16px;
+      padding: 13px 18px;
+      font-size: 16px;
+      font-weight: 900;
+      transition: .2s ease;
+      min-width: 150px;
+    }
+
+    #yesBtn{
+      background: var(--pink);
+      color:white;
+    }
+    #yesBtn:hover{ transform: scale(1.05); }
+
+    #noBtn{
+      background:#f3f3f3;
+      color:#222;
+      position: relative;
+    }
+
+    .tiny{
+      font-size:13px;
+      opacity:.82;
+      margin-top: 6px;
+    }
+
+    .songBox{
+      margin-top: 14px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid #ffd1dc;
+      background:white;
+    }
+
+    .footer{
+      margin-top: 14px;
+      font-size: 13px;
+      color:#666;
+      font-weight:700;
+    }
+
+    /* ---------- Hearts ---------- */
+    .hearts{
+      position:absolute;
+      font-size:20px;
+      animation: floatUp 3.2s linear infinite;
+      opacity:.85;
+      pointer-events:none;
+      z-index: 5;
+    }
+
+    @keyframes floatUp{
+      from { transform: translateY(0); opacity: 1; }
+      to   { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    /* Responsive fallback */
+    @media (max-width: 980px){
+      body{ padding:16px; overflow:auto; }
+      .grid{ grid-template-columns: 1fr; }
+      .gallery{ aspect-ratio: 4/3; }
+      .shell{ padding:14px; }
+    }
+
+    @media (max-width: 420px){
+      h1{ font-size: 26px; }
+      p{ font-size: 14.5px; }
+      button.action{ width:100%; }
+      .btns{ justify-content:center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell" id="shell">
+    <div class="grid" id="mainGrid">
+      <!-- LEFT -->
+      <div class="panel">
+        <div class="topRow">
+          <div class="badge">💌 For Divya</div>
+          <div class="miniTag">from Swayam 🫶</div>
+        </div>
+
+        <h1>Hey <span class="name">My Princess</span> 👑💖</h1>
+        <p>
+          I made this little website because you deserve cute things…
+          and also because I am <b>extremely</b> obsessed with you 🤭💕
+        </p>
+
+        <!-- Gallery -->
+        <div class="galleryBox">
+          <div class="galleryTitle">
+            <span>📸 Our Cute Moments</span>
+            <small>Click arrows or dots</small>
+          </div>
+
+          <div class="gallery" id="gallery">
+            <div class="slides" id="slides"></div>
+
+            <button class="navBtn prev" id="prevBtn" aria-label="Previous photo">‹</button>
+            <button class="navBtn next" id="nextBtn" aria-label="Next photo">›</button>
+          </div>
+
+          <div class="dots" id="dots"></div>
+        </div>
+
+        <!-- Reasons -->
+        <div class="galleryBox" style="margin-top:16px;">
+          <div class="galleryTitle">
+            <span>💌 Reasons I Love You</span>
+            <small>(click for more 😭)</small>
+          </div>
+
+          <div class="reasonsGrid" id="reasonsGrid"></div>
+
+          <p class="tiny" style="margin-top:10px;">
+            Divya you’re not allowed to say “I’m not cute” ever again 😤💕
+          </p>
+        </div>
+
+        <div class="footer">
+          Official relationship status: <b>Divya = Princess 👑</b> &nbsp;|&nbsp; <b>Swayam = Lucky 😭</b>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="panel" id="rightPanel">
+        <div class="badge">💘 Valentine Proposal</div>
+
+        <div class="cardMini">
+          <div class="questionTitle">Will you be my Valentine? 🌷</div>
+          <p>
+            Divya, I promise to annoy you forever…<br/>
+            but in the cutest way possible 😭💖
+          </p>
+          <p class="tiny">
+            Warning: Clicking “NO” activates my special feature:
+            <b>“button escapes to avoid rejection”</b> 🏃‍♂️💨
+          </p>
+
+          <div class="btns">
+            <button class="action" id="yesBtn">YES 💕</button>
+            <button class="action" id="noBtn">NO 🙃</button>
+          </div>
+        </div>
+
+        <div class="songBox">
+          <iframe
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v?utm_source=generator"
+            width="100%"
+            height="152"
+            frameborder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
+
+        <!-- Love Meter -->
+        <div class="cardMini" style="margin-top:14px;">
+          <div class="questionTitle" style="font-size:22px;">Love Meter 💗</div>
+          <p style="margin-top:6px;">Tap the button to receive instant love from Swayam 😭💘</p>
+
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:10px;">
+            <button class="action" id="loveBtn">Tap for Love 💖</button>
+            <div style="font-weight:900; font-size:16px;">
+              Love received: <span id="loveCount" style="color:var(--pink);">0</span>
+            </div>
+          </div>
+
+          <p class="tiny" id="loveMsg" style="margin-top:10px;">(warning: may cause blushing 😳)</p>
+        </div>
+
+        <p class="tiny" style="margin-top:10px;">
+          (Play this song and read the page again. 100% emotional damage guaranteed 😭🎶)
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ✅ Put your photos in repo folder: photos/
+    // ✅ Use "./photos/..." to always work on GitHub Pages
+    const photos = [
+      {
+        url: "./photos/IMG-20251125-WA0003.jpg",
+        caption: "Amuu + His Aphrodite = cutest combo 💗"
+      },
+      {
+        url: "./photos/IMG-20241206-WA0001.jpg",
+        caption: "My tastyyy rasmalaiii 😭🍮"
+      },
+      {
+        url: "./photos/IMG_20251225_182204510.jpg",
+        caption: "Forever? YES PLEASEEEE 💍💕"
+      }
+    ];
+
+    const slides = document.getElementById("slides");
+    const dots = document.getElementById("dots");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let index = 0;
+
+    function renderGallery(){
+      slides.innerHTML = "";
+      dots.innerHTML = "";
+
+      photos.forEach((p, i) => {
+        const slide = document.createElement("div");
+        slide.className = "slide";
+        slide.innerHTML = `
+          <div class="polaroid">
+            <img src="${p.url}" alt="Photo ${i+1}">
+            <div class="polaroidBottom">
+              <div class="polaroidText">${p.caption}</div>
+              <div class="polaroidSticker">#MyPrincess 👑</div>
+            </div>
+          </div>
+        `;
+        slides.appendChild(slide);
+
+        const dot = document.createElement("div");
+        dot.className = "dot" + (i === index ? " active" : "");
+        dot.addEventListener("click", () => {
+          index = i;
+          updateSlides();
+        });
+        dots.appendChild(dot);
+      });
+
+      updateSlides();
+    }
+
+    function updateSlides(){
+      slides.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll(".dot").forEach((d, i) => {
+        d.classList.toggle("active", i === index);
+      });
+    }
+
+    prevBtn.addEventListener("click", () => {
+      index = (index - 1 + photos.length) % photos.length;
+      updateSlides();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      index = (index + 1) % photos.length;
+      updateSlides();
+    });
+
+    // Reasons I love you 💌
+    const reasons = [
+      "Your smile fixes my mood instantly 😭💖",
+      "You’re my favorite person in the whole world 🌍💕",
+      "You act cute without even trying 🥺",
+      "You make everything feel like home 🫶",
+      "Your voice is my comfort song 🎶",
+      "You are my Princess. Always. 👑",
+      "You’re my sweetest rasmalaiiiii 😭🍮",
+      "You’re literally my heart’s favorite habit 💘",
+      "With you, even boring days become special ✨",
+      "I love how you tolerate my nonsense 🤭💕"
+    ];
+
+    const reasonsGrid = document.getElementById("reasonsGrid");
+
+    function renderReasons(){
+      reasonsGrid.innerHTML = "";
+      const shuffled = [...reasons].sort(() => Math.random() - 0.5).slice(0,4);
+
+      shuffled.forEach((text) => {
+        const card = document.createElement("div");
+        card.className = "reasonCard";
+        card.innerHTML = `
+          ${text}
+          <div class="reasonSmall">click me for another reason 👉</div>
+        `;
+        card.addEventListener("click", () => renderReasons());
+        reasonsGrid.appendChild(card);
+      });
+    }
+
+    renderReasons();
+
+    // Love meter 💗
+    let love = 0;
+    const loveBtn = document.getElementById("loveBtn");
+    const loveCount = document.getElementById("loveCount");
+    const loveMsg = document.getElementById("loveMsg");
+
+    const loveMessages = [
+      "1 hug loaded 🫂",
+      "1 kiss delivered 💋",
+      "Divya is officially adored 😭💗",
+      "My Princess energy detected 👑✨",
+      "You + Me = forever 🔒💕",
+      "I miss you already 🥺",
+      "Extra love boost activated 🚀💘"
+    ];
+
+    loveBtn.addEventListener("click", () => {
+      love++;
+      loveCount.textContent = love;
+      loveMsg.textContent = loveMessages[Math.floor(Math.random()*loveMessages.length)];
+    });
+
+    // YES button -> full screen message
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const shell = document.getElementById("shell");
+
+    yesBtn.addEventListener("click", () => {
+      shell.innerHTML = `
+        <div style="
+          background:white;
+          border-radius:36px;
+          padding:40px;
+          box-shadow: 0 30px 90px rgba(0,0,0,0.22);
+          text-align:center;
+          max-width: 980px;
+          margin: 0 auto;
+        ">
+          <div style="
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            padding:10px 16px;
+            border-radius:999px;
+            background:#ffe6ee;
+            color:#ff3b6a;
+            font-weight:900;
+            margin-bottom: 14px;
+          ">✅ SHE SAID YES!</div>
+
+          <h1 style="margin:10px 0; font-size:42px; color:#ff3b6a;">
+            AYYYY DIVYA 💖
+          </h1>
+
+          <p style="font-size:18px; color:#333; line-height:1.6;">
+            My Princess 👑😭<br/>
+            You just made me the happiest person alive.<br/>
+            Happy Valentine’s Day 🌹💕
+          </p>
+
+          <p style="font-size:15px; opacity:.85; font-weight:700;">
+            Official update: Swayam is now permanently smiling like an idiot 🤭
+          </p>
+
+          <div style="margin-top:18px; border-radius:18px; overflow:hidden; border:2px solid #ffd1dc;">
+            <iframe
+              style="border-radius:12px"
+              src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v?utm_source=generator"
+              width="100%"
+              height="152"
+              frameborder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <div style="margin-top:18px; font-weight:800; color:#666;">
+            Forever yours, <span style="color:#ff3b6a;">Swayam</span> 🫶
+          </div>
+        </div>
+      `;
+    });
+
+    // NO button runs away 🤭
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 260 - 130;
+      const y = Math.random() * 180 - 90;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Floating hearts
+    function createHeart(){
+      const heart = document.createElement("div");
+      heart.classList.add("hearts");
+      heart.innerText = ["💖","💘","💕","❤️","🌸","👑","🥰"][Math.floor(Math.random()*7)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "105vh";
+      heart.style.animationDuration = (2.5 + Math.random() * 2.6) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4500);
+    }
+    setInterval(createHeart, 260);
+
+    renderGallery();
+  </script>
+</body>
+</html>
