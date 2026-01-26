@@ -17,31 +17,41 @@
 
     *{ box-sizing:border-box; }
 
+    html, body{
+  height: auto;
+}
+
+
     body{
-      margin:0;
-      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-      background: radial-gradient(circle at top left, #ffd1dc, transparent 55%),
-                  radial-gradient(circle at bottom right, #ffe4e1, transparent 60%),
-                  linear-gradient(135deg, #ffb6c1, #ffe4e1);
-      min-height:100vh;
-      overflow-y: auto;
+  margin:0;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  background: radial-gradient(circle at top left, #ffd1dc, transparent 55%),
+              radial-gradient(circle at bottom right, #ffe4e1, transparent 60%),
+              linear-gradient(135deg, #ffb6c1, #ffe4e1);
+  min-height:100vh;
+
+  /* ✅ scrolling fix */
+  overflow-y: auto;
   overflow-x: hidden;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
+
+  /* ✅ don’t lock page in center */
+  display:block;
   padding:30px;
-    }
+}
+
 
     .shell{
-      width: min(1100px, 100%);
-      background: rgba(255,255,255,0.55);
-      border: 1px solid rgba(255,255,255,0.55);
-      backdrop-filter: blur(10px);
-      border-radius: 36px;
-      box-shadow: 0 30px 90px rgba(0,0,0,0.22);
-      padding: 18px;
-      position: relative;
-    }
+  width: min(1100px, 100%);
+  margin: 0 auto;   /* ✅ center properly without flex */
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.55);
+  backdrop-filter: blur(10px);
+  border-radius: 36px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.22);
+  padding: 18px;
+  position: relative;
+}
+
 
     .grid{
       display:grid;
