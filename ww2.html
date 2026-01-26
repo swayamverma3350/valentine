@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Divya 💖</title>
+
+  <style>
+    :root{
+      --pink:#ff3b6a;
+      --soft:#ffe6ee;
+      --text:#2e2e2e;
+      --card:#ffffff;
+      --shadow: 0 18px 50px rgba(0,0,0,0.18);
+      --radius: 28px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #ffd1dc, transparent 55%),
+                  radial-gradient(circle at bottom right, #ffe4e1, transparent 60%),
+                  linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      min-height:100vh;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:30px;
+    }
+
+    .shell{
+      width: min(1100px, 100%);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.55);
+      backdrop-filter: blur(10px);
+      border-radius: 36px;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.22);
+      padding: 18px;
+      position: relative;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 18px;
+    }
+
+    .panel{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background: var(--soft);
+      color: var(--pink);
+      font-weight:800;
+      font-size:14px;
+      letter-spacing: 0.2px;
+      white-space:nowrap;
+    }
+
+    .miniTag{
+      font-size:13px;
+      font-weight:700;
+      opacity:.8;
+      color:#444;
+      white-space:nowrap;
+    }
+
+    h1{
+      margin: 10px 0 6px;
+      font-size: 32px;
+      color: var(--pink);
+      line-height:1.1;
+    }
+
+    p{
+      margin: 10px 0;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .name{
+      font-weight:900;
+    }
+
+    /* ---------- Gallery ---------- */
+    .galleryBox{
+      margin-top: 10px;
+      border: 2px solid #ffd1dc;
+      border-radius: 22px;
+      padding: 14px;
+      background: #fff7fa;
+    }
+
+    .galleryTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 12px;
+      font-weight:900;
+      color: var(--pink);
+    }
+
+    .galleryTitle small{
+      font-weight:800;
+      opacity:.75;
+      color:#444;
+    }
+
+    .gallery{
+      position:relative;
+      width:100%;
+      border-radius: 20px;
+      overflow:hidden;
+      background:#ffeef2;
+      aspect-ratio: 16/10;
+      max-height: 420px;
+    }
+
+    .slides{
+      display:flex;
+      height:100%;
+      width:100%;
+      transform: translateX(0);
+      transition: transform .35s ease;
+    }
+
+    .slide{
+      min-width:100%;
+      height:100%;
+      position:relative;
+    }
+
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .caption{
+      position:absolute;
+      left:14px;
+      right:14px;
+      bottom:14px;
+      background: rgba(255,255,255,.88);
+      padding: 10px 12px;
+      border-radius: 16px;
+      font-weight: 900;
+      color:#333;
+      backdrop-filter: blur(5px);
+      text-align:center;
+      font-size: 14px;
+    }
+
+    .navBtn{
+      position:absolute;
+      top:50%;
+      transform: translateY(-50%);
+      width:48px;
+      height:48px;
+      border:none;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:20px;
+      font-weight:900;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 12px 26px rgba(0,0,0,.18);
+      user-select:none;
+    }
+
+    .prev{ left:12px; }
+    .next{ right:12px; }
+
+    .dots{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:#ffc2cf;
+      opacity:.6;
+      cursor:pointer;
+      transition: .2s ease;
+    }
+    .dot.active{
+      background: var(--pink);
+      opacity:1;
+      transform: scale(1.15);
+    }
+
+    /* ---------- Right Panel (Question) ---------- */
+    .questionTitle{
+      font-size: 26px;
+      font-weight: 1000;
+      color: var(--pink);
+      margin: 10px 0 6px;
+    }
+
+    .cardMini{
+      background: #fff7fa;
+      border: 2px solid #ffd1dc;
+      border-radius: 22px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .btns{
+      display:flex;
+      gap:14px;
+      margin-top: 14px;
+      align-items:center;
+      justify-content:flex-start;
+      flex-wrap: wrap;
+    }
+
+    button.action{
+      border:none;
+      cursor:pointer;
+      border-radius: 16px;
+      padding: 13px 18px;
+      font-size: 16px;
+      font-weight: 900;
+      transition: .2s ease;
+      min-width: 150px;
+    }
+
+    #yesBtn{
+      background: var(--pink);
+      color:white;
+    }
+    #yesBtn:hover{ transform: scale(1.05); }
+
+    #noBtn{
+      background:#f3f3f3;
+      color:#222;
+      position: relative;
+    }
+
+    .tiny{
+      font-size:13px;
+      opacity:.82;
+      margin-top: 6px;
+    }
+
+    .songBox{
+      margin-top: 14px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid #ffd1dc;
+      background:white;
+    }
+
+    .footer{
+      margin-top: 14px;
+      font-size: 13px;
+      color:#666;
+      font-weight:700;
+    }
+
+    /* ---------- Hearts ---------- */
+    .hearts{
+      position:absolute;
+      font-size:20px;
+      animation: floatUp 3.2s linear infinite;
+      opacity:.85;
+      pointer-events:none;
+      z-index: 5;
+    }
+
+    @keyframes floatUp{
+      from { transform: translateY(0); opacity: 1; }
+      to   { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    /* Responsive fallback if screen is small */
+    @media (max-width: 980px){
+      body{ padding:16px; }
+      .grid{ grid-template-columns: 1fr; }
+      .gallery{ aspect-ratio: 4/3; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell" id="shell">
+    <div class="grid" id="mainGrid">
+      <!-- LEFT: Gallery -->
+      <div class="panel">
+        <div class="topRow">
+          <div class="badge">💌 For Divya</div>
+          <div class="miniTag">from Swayam 🫶</div>
+        </div>
+
+        <h1>Hey <span class="name">My Princess</span> 👑💖</h1>
+        <p>
+          I made this little website because you deserve cute things…
+          and also because I am <b>extremely</b> obsessed with you 🤭💕
+        </p>
+
+        <div class="galleryBox">
+          <div class="galleryTitle">
+            <span>📸 Our Cute Moments</span>
+            <small>Click arrows or dots</small>
+          </div>
+
+          <div class="gallery" id="gallery">
+            <div class="slides" id="slides"></div>
+
+            <button class="navBtn prev" id="prevBtn" aria-label="Previous photo">‹</button>
+            <button class="navBtn next" id="nextBtn" aria-label="Next photo">›</button>
+          </div>
+
+          <div class="dots" id="dots"></div>
+        </div>
+
+        <div class="footer">
+          Official relationship status: <b>Divya = Princess 👑</b> &nbsp;|&nbsp; <b>Swayam = Lucky 😭</b>
+        </div>
+      </div>
+
+      <!-- RIGHT: Question + Music -->
+      <div class="panel" id="rightPanel">
+        <div class="badge">💘 Valentine Proposal</div>
+
+        <div class="cardMini">
+          <div class="questionTitle">Will you be my Valentine? 🌷</div>
+          <p>
+            Divya, I promise to annoy you forever…<br/>
+            but in the cutest way possible 😭💖
+          </p>
+          <p class="tiny">
+            Warning: Clicking “NO” activates my special feature:
+            <b>“button escapes to avoid rejection”</b> 🏃‍♂️💨
+          </p>
+
+          <div class="btns">
+            <button class="action" id="yesBtn">YES 💕</button>
+            <button class="action" id="noBtn">NO 🙃</button>
+          </div>
+        </div>
+
+        <div class="songBox">
+          <iframe
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v?utm_source=generator"
+            width="100%"
+            height="152"
+            frameborder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
+
+        <p class="tiny" style="margin-top:10px;">
+          (Play this song and read the page again. 100% emotional damage guaranteed 😭🎶)
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ✅ Your Drive photos converted to direct links
+    const photos = [
+      {
+        url: "https://drive.google.com/uc?export=view&id=1e4paeLI1LxdKo2eGdEfVcBJ8k1cJBwiz",
+        caption: "Divya + Swayam = cutest combo 💗"
+      },
+      {
+        url: "https://drive.google.com/uc?export=view&id=17g8BclYstglbxybquPVyaAN4Kr6Wpqtq",
+        caption: "My Princess energy 👑✨"
+      },
+      {
+        url: "https://drive.google.com/uc?export=view&id=1Tqxgfy2RkDgwCY2vws6whPL5GcfgeHQx",
+        caption: "Every moment with you feels like a movie 🎬💕"
+      }
+    ];
+
+    const slides = document.getElementById("slides");
+    const dots = document.getElementById("dots");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let index = 0;
+
+    function renderGallery(){
+      slides.innerHTML = "";
+      dots.innerHTML = "";
+
+      photos.forEach((p, i) => {
+        const slide = document.createElement("div");
+        slide.className = "slide";
+        slide.innerHTML = `
+          <img src="${p.url}" alt="Photo ${i+1}">
+          <div class="caption">${p.caption}</div>
+        `;
+        slides.appendChild(slide);
+
+        const dot = document.createElement("div");
+        dot.className = "dot" + (i === index ? " active" : "");
+        dot.addEventListener("click", () => {
+          index = i;
+          updateSlides();
+        });
+        dots.appendChild(dot);
+      });
+
+      updateSlides();
+    }
+
+    function updateSlides(){
+      slides.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll(".dot").forEach((d, i) => {
+        d.classList.toggle("active", i === index);
+      });
+    }
+
+    prevBtn.addEventListener("click", () => {
+      index = (index - 1 + photos.length) % photos.length;
+      updateSlides();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      index = (index + 1) % photos.length;
+      updateSlides();
+    });
+
+    // YES button -> full screen cute message
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const shell = document.getElementById("shell");
+
+    yesBtn.addEventListener("click", () => {
+      shell.innerHTML = `
+        <div style="
+          background:white;
+          border-radius:36px;
+          padding:40px;
+          box-shadow: 0 30px 90px rgba(0,0,0,0.22);
+          text-align:center;
+          max-width: 980px;
+          margin: 0 auto;
+        ">
+          <div style="
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            padding:10px 16px;
+            border-radius:999px;
+            background:#ffe6ee;
+            color:#ff3b6a;
+            font-weight:900;
+            margin-bottom: 14px;
+          ">✅ SHE SAID YES!</div>
+
+          <h1 style="margin:10px 0; font-size:42px; color:#ff3b6a;">
+            AYYYY DIVYA 💖
+          </h1>
+
+          <p style="font-size:18px; color:#333; line-height:1.6;">
+            My Princess 👑😭<br/>
+            You just made me the happiest person alive.<br/>
+            Happy Valentine’s Day 🌹💕
+          </p>
+
+          <p style="font-size:15px; opacity:.85; font-weight:700;">
+            Official update: Swayam is now permanently smiling like an idiot 🤭
+          </p>
+
+          <div style="margin-top:18px; border-radius:18px; overflow:hidden; border:2px solid #ffd1dc;">
+            <iframe
+              style="border-radius:12px"
+              src="https://open.spotify.com/embed/track/0tgVpDi06FyKpA1z0VMD4v?utm_source=generator"
+              width="100%"
+              height="152"
+              frameborder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <div style="margin-top:18px; font-weight:800; color:#666;">
+            Forever yours, <span style="color:#ff3b6a;">Swayam</span> 🫶
+          </div>
+        </div>
+      `;
+    });
+
+    // NO button runs away 🤭
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 260 - 130;
+      const y = Math.random() * 180 - 90;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Floating hearts in background
+    function createHeart(){
+      const heart = document.createElement("div");
+      heart.classList.add("hearts");
+      heart.innerText = ["💖","💘","💕","❤️","🌸","👑","🥰"][Math.floor(Math.random()*7)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "105vh";
+      heart.style.animationDuration = (2.5 + Math.random() * 2.6) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4500);
+    }
+    setInterval(createHeart, 260);
+
+    renderGallery();
+  </script>
+</body>
+</html>
