@@ -177,36 +177,34 @@
   padding: 14px;
   display:flex;
   flex-direction:column;
-  gap: 12px;
-
-  /* ✅ key fixes */
-  height: auto;
+  gap: 10px;
 }
 
-    .polaroid img{
+/* image only controls its own height */
+.polaroid img{
   width:100%;
-  max-height: 320px;   /* image stays controlled */
+  max-height: 320px;
   object-fit: contain;
   border-radius: 14px;
   background: #ffeef2;
   display:block;
 }
 
-    .polaroidBottom{
+/* caption container */
+.polaroidBottom{
   display:flex;
+  justify-content:center;
   align-items:center;
-  justify-content:center; /* ✅ centers content horizontally */
-  padding: 6px 4px 2px;
+  padding-top: 6px;
 }
 
-
-   .polaroidText{
+/* caption text */
+.polaroidText{
   font-weight: 900;
   color: #333;
   font-size: 14px;
-  text-align: center;   /* ✅ centers caption */
-  width: 100%;
-     line-height: 1.4;
+  text-align: center;
+  line-height: 1.5;
 }
 
 
@@ -310,7 +308,6 @@
   font-size: 15px;
   font-weight: 800;
   color: #555;
-  opacity: 0.9;
 }
 
 .chooseText{
@@ -318,7 +315,6 @@
   font-weight: 900;
   color: #ff3b6a;
   line-height: 1.5;
-  animation: fadeIn 0.4s ease forwards;
 }
 
 .chooseText span{
@@ -332,6 +328,8 @@
   display: none;
 }
 
+
+   
 @keyframes fadeIn{
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -523,6 +521,7 @@
 </div>
 
 
+        
         <div class="songBox">
           <iframe
             style="border-radius:12px"
@@ -570,16 +569,6 @@
 
     let index = 0;
 
-    const chooseCard = document.getElementById("chooseYouCard");
-const choosePrompt = document.getElementById("choosePrompt");
-const chooseText = document.getElementById("chooseText");
-
-chooseCard.addEventListener("click", () => {
-  choosePrompt.style.display = "none";
-  chooseText.classList.remove("hidden");
-});
-
-
     function renderGallery(){
       slides.innerHTML = "";
       dots.innerHTML = "";
@@ -588,14 +577,13 @@ chooseCard.addEventListener("click", () => {
         const slide = document.createElement("div");
         slide.className = "slide";
         slide.innerHTML = `
-          <div class="polaroid">
-            <img src="${p.url}" alt="Photo ${i+1}">
-            <div class="polaroidBottom">
-              <div class="polaroidText">${p.caption}</div>
-              
-            </div>
-          </div>
-        `;
+  <div class="polaroid">
+    <img src="${p.url}" alt="Photo ${i+1}">
+    <div class="polaroidBottom">
+      <div class="polaroidText">${p.caption}</div>
+    </div>
+  </div>
+`;
         slides.appendChild(slide);
 
         const dot = document.createElement("div");
@@ -767,6 +755,18 @@ chooseCard.addEventListener("click", () => {
     setInterval(createHeart, 260);
 
     renderGallery();
+
+    const chooseCard = document.getElementById("chooseYouCard");
+const choosePrompt = document.getElementById("choosePrompt");
+const chooseText = document.getElementById("chooseText");
+
+if (chooseCard) {
+  chooseCard.addEventListener("click", () => {
+    choosePrompt.style.display = "none";
+    chooseText.classList.remove("hidden");
+  });
+}
+
   </script>
 </body>
 </html>
