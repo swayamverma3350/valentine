@@ -141,15 +141,19 @@
     }
 
     /* ---------- Gallery ---------- */
-    .gallery{
-      position:relative;
-      width:100%;
-      border-radius: 20px;
-      overflow:hidden;
-      background:#ffeef2;
-      aspect-ratio: 16/10;
-      max-height: 420px;
-    }
+   .gallery{
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  background: #ffeef2;
+
+  /* ✅ IMPORTANT FIX */
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  aspect-ratio: auto;
+  max-height: none;
+}
 
     .slides{
       display:flex;
@@ -160,14 +164,12 @@
     }
 
     .slide{
-      min-width:100%;
-      height:100%;
-      position:relative;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding: 18px;
-    }
+  min-width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 18px 0;
+}
 
     .polaroid{
   width: min(92%, 520px);
@@ -192,20 +194,21 @@
 
 /* caption container */
 .polaroidBottom{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding-top: 6px;
+  display: flex;
+  justify-content: center;
+  padding: 10px 6px 6px;
 }
 
-/* caption text */
 .polaroidText{
   font-weight: 900;
   color: #333;
   font-size: 14px;
   text-align: center;
   line-height: 1.5;
+  white-space: normal;   /* ✅ allow wrapping */
+  word-break: break-word;
 }
+
 
 
 
