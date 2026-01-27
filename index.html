@@ -300,30 +300,34 @@
       margin-top: 14px;
     }
 
-    .chooseYou{
+  .chooseYou{
   background: linear-gradient(135deg, #fff0f5, #ffe6ee);
   text-align: center;
-  padding: 18px 16px;
+  padding: 26px 20px;      /* ✅ bigger padding */
   cursor: pointer;
+  min-height: 120px;       /* ✅ makes the box taller */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ✅ vertically centers content */
 }
 
 .choosePrompt{
-  font-size: 15px;
-  font-weight: 800;
+  font-size: 17px;         /* ✅ larger text */
+  font-weight: 900;
   color: #555;
 }
 
 .chooseText{
-  font-size: 18px;
-  font-weight: 900;
+  font-size: 22px;         /* ✅ bigger reveal text */
+  font-weight: 1000;
   color: #ff3b6a;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .chooseText span{
   display: block;
-  margin-top: 6px;
-  font-size: 20px;
+  margin-top: 8px;
+  font-size: 24px;         /* ✅ emphasis */
   color: #d6336c;
 }
 
@@ -471,9 +475,7 @@
           </p>
         </div>
 
-        <div class="footer">
-          Official relationship status: <b>You = My Princess 👑</b> &nbsp;|&nbsp; <b>Me = Lucky 😭</b>
-        </div>
+        
       </div>
 
       <!-- RIGHT -->
@@ -545,6 +547,11 @@
         </p>
       </div>
     </div>
+    <div class="footer" style="text-align:center; margin-top:24px;">
+  Official relationship update:<br/>
+  <b>You = My Princess 👑</b> &nbsp;|&nbsp; <b>Me = VERY Lucky 😭</b>
+</div>
+
   </div>
 
   <script>
