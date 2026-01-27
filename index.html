@@ -299,6 +299,45 @@
       margin-top: 14px;
     }
 
+    .chooseYou{
+  background: linear-gradient(135deg, #fff0f5, #ffe6ee);
+  text-align: center;
+  padding: 18px 16px;
+  cursor: pointer;
+}
+
+.choosePrompt{
+  font-size: 15px;
+  font-weight: 800;
+  color: #555;
+  opacity: 0.9;
+}
+
+.chooseText{
+  font-size: 18px;
+  font-weight: 900;
+  color: #ff3b6a;
+  line-height: 1.5;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.chooseText span{
+  display: block;
+  margin-top: 6px;
+  font-size: 20px;
+  color: #d6336c;
+}
+
+.hidden{
+  display: none;
+}
+
+@keyframes fadeIn{
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
     .btns{
       display:flex;
       gap:14px;
@@ -472,6 +511,18 @@
           <p class="tiny" id="loveMsg" style="margin-top:10px;">(warning: may cause blushing 😳)</p>
         </div>
 
+        <div class="cardMini chooseYou" id="chooseYouCard">
+  <div class="choosePrompt" id="choosePrompt">
+    Tap to reveal something 💌
+  </div>
+
+  <div class="chooseText hidden" id="chooseText">
+    Today, tomorrow, always —
+    <span>I choose you.</span> 💖
+  </div>
+</div>
+
+
         <div class="songBox">
           <iframe
             style="border-radius:12px"
@@ -518,6 +569,16 @@
     const nextBtn = document.getElementById("nextBtn");
 
     let index = 0;
+
+    const chooseCard = document.getElementById("chooseYouCard");
+const choosePrompt = document.getElementById("choosePrompt");
+const chooseText = document.getElementById("chooseText");
+
+chooseCard.addEventListener("click", () => {
+  choosePrompt.style.display = "none";
+  chooseText.classList.remove("hidden");
+});
+
 
     function renderGallery(){
       slides.innerHTML = "";
