@@ -7,6 +7,67 @@
 
   <style>
 
+    /* 🔐 Password Lock Screen */
+
+#lockScreen{
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lockCard{
+  background: white;
+  padding: 36px 28px;
+  border-radius: 28px;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.25);
+}
+
+.lockCard h1{
+  color: #ff3b6a;
+  margin-bottom: 8px;
+}
+
+.lockCard p{
+  font-weight: 700;
+  color: #444;
+}
+
+#passwordInput{
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 2px solid #ffd1dc;
+  margin-top: 14px;
+  font-size: 16px;
+}
+
+#unlockBtn{
+  margin-top: 14px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: #ff3b6a;
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+#lockError{
+  margin-top: 10px;
+  color: #d6336c;
+  font-weight: 800;
+  display: none;
+}
+
     /* 💥 BIG HEART BURST */
 .heartBurst{
   position: absolute;
@@ -500,6 +561,25 @@
 </head>
 
 <body>
+  <!-- 🔐 PASSWORD SCREEN -->
+<div id="lockScreen">
+  <div class="lockCard">
+    <h1>🔒 Private Website</h1>
+    <p>This page is only for <b>My Princess 👑</b></p>
+
+    <input
+      type="password"
+      id="passwordInput"
+      placeholder="Enter the secret password 💌"
+    />
+
+    <button id="unlockBtn">Unlock 💖</button>
+
+    <p id="lockError">Wrong password 😤 try again</p>
+  </div>
+</div>
+
+  <div id="siteContent" style="display:none;">
   <div class="shell" id="shell">
     <div class="grid" id="mainGrid">
       <!-- LEFT -->
@@ -640,10 +720,10 @@
       </div> <!-- ✅ CLOSE rightPanel -->
 
           </div> <!-- closes .grid -->
-  </div>   <!-- closes .shell -->
+  </div> <!-- closes .shell -->
+  </div>
 
-
-
+    
   <script>
     // ✅ Put your photos in repo folder: photos/
     // ✅ Use "./photos/..." to always work on GitHub Pages
@@ -907,6 +987,31 @@ if (chooseCard) {
     bigHeartBurst(chooseCard);
   });
 }
+
+    // 🔐 PASSWORD PROTECTION
+const correctPassword = "MyPrincess"; // ← CHANGE THIS
+
+const lockScreen = document.getElementById("lockScreen");
+const siteContent = document.getElementById("siteContent");
+const unlockBtn = document.getElementById("unlockBtn");
+const passwordInput = document.getElementById("passwordInput");
+const lockError = document.getElementById("lockError");
+
+unlockBtn.addEventListener("click", checkPassword);
+passwordInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") checkPassword();
+});
+
+function checkPassword(){
+  if (passwordInput.value === correctPassword){
+    lockScreen.style.display = "none";
+    siteContent.style.display = "block";
+  } else {
+    lockError.style.display = "block";
+    passwordInput.value = "";
+  }
+}
+
 
   </script>
 </body>
