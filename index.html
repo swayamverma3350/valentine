@@ -7,6 +7,42 @@
 
   <style>
 
+    /* ✨ Fade-in animation for site */
+.fadeIn{
+  animation: fadeSite 0.8s ease forwards;
+}
+
+@keyframes fadeSite{
+  from{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    /* 💖 Password Success Hearts */
+.passHeart{
+  position: fixed;
+  font-size: 28px;
+  pointer-events: none;
+  animation: passHeartFloat 1.4s ease-out forwards;
+  z-index: 10000;
+}
+
+@keyframes passHeartFloat{
+  from{
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  to{
+    transform: translate(var(--x), var(--y)) scale(1.4);
+    opacity: 0;
+  }
+}
+
     /* 🔐 Password Lock Screen */
 
 #lockScreen{
@@ -1019,6 +1055,7 @@ if (chooseCard) {
   });
 }
 
+    
     // 🔐 PASSWORD PROTECTION
 const correctPassword = "MyPrincess"; // ← CHANGE THIS
 
@@ -1033,15 +1070,51 @@ passwordInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") checkPassword();
 });
 
+
+    function passwordHeartBurst(){
+  const hearts = ["💖","💕","💘","❤️","💞"];
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+
+  for(let i = 0; i < 16; i++){
+    const heart = document.createElement("div");
+    heart.className = "passHeart";
+    heart.innerText = hearts[Math.floor(Math.random()*hearts.length)];
+
+    const angle = (Math.PI * 2 / 16) * i;
+    const distance = 120 + Math.random() * 80;
+
+    heart.style.left = cx + "px";
+    heart.style.top = cy + "px";
+    heart.style.setProperty("--x", Math.cos(angle) * distance + "px");
+    heart.style.setProperty("--y", Math.sin(angle) * distance + "px");
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1400);
+  }
+}
+
 function checkPassword(){
   if (passwordInput.value === correctPassword){
-    lockScreen.style.display = "none";
+
+    // 💖 Celebrate correct password
+    passwordHeartBurst();
+
+    // ✨ Fade in site
     siteContent.style.display = "block";
+    siteContent.classList.add("fadeIn");
+
+    // ⏳ Hide lock screen after animation starts
+    setTimeout(() => {
+      lockScreen.style.display = "none";
+    }, 300);
+
   } else {
     lockError.style.display = "block";
     passwordInput.value = "";
   }
 }
+
 
     // 🔑 Password Hint Logic
 const hintBtn = document.getElementById("hintBtn");
