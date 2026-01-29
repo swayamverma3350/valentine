@@ -68,6 +68,31 @@
   display: none;
 }
 
+
+    /* 🔑 Password Hint */
+
+.hintBtn{
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: 2px dashed #ffd1dc;
+  background: transparent;
+  color: #ff3b6a;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.hintText{
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: #555;
+  font-weight: 700;
+  display: none;
+}
+
+
     /* 💥 BIG HEART BURST */
 .heartBurst{
   position: absolute;
@@ -565,7 +590,7 @@
 <div id="lockScreen">
   <div class="lockCard">
     <h1>🔒 Private Website</h1>
-    <p>This page is only for <b>My Princess 👑</b></p>
+    <p>This page is only for <b>Divya</b></p>
 
     <input
       type="password"
@@ -574,6 +599,12 @@
     />
 
     <button id="unlockBtn">Unlock 💖</button>
+    <button id="hintBtn" class="hintBtn">Need a hint? 👀</button>
+
+<p id="hintText" class="hintText">
+  It’s what I always call you 👑
+</p>
+
 
     <p id="lockError">Wrong password 😤 try again</p>
   </div>
@@ -1011,6 +1042,18 @@ function checkPassword(){
     passwordInput.value = "";
   }
 }
+
+    // 🔑 Password Hint Logic
+const hintBtn = document.getElementById("hintBtn");
+const hintText = document.getElementById("hintText");
+
+if (hintBtn) {
+  hintBtn.addEventListener("click", () => {
+    hintText.style.display = "block";
+    hintBtn.style.display = "none";
+  });
+}
+
 
 
   </script>
